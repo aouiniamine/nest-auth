@@ -5,16 +5,16 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-    @Prop()
+    @Prop({type: String})
     name = String;
     
-    @Prop()
+    @Prop({type: String})
     email = String;
     
-    @Prop()
+    @Prop({type: String})
     password = String;
     
-    @Prop()
+    @Prop({type: Boolean})
     isVerified = Boolean;
 }
 
