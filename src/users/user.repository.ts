@@ -12,5 +12,8 @@ export class UserRepository {
         return this.userModel.findOne(filterQuery);
     }
 
-    
+    async addUser(user: User): Promise<User>{
+        const newUser = new this.userModel(user);
+        return newUser.save();
+    }
 }
