@@ -14,7 +14,7 @@ export class User {
     @Prop({type: String})
     password = String;
     
-    @Prop({type: Boolean})
+    @Prop({type: Boolean, default: false})
     isVerified = Boolean;
 }
 
