@@ -13,7 +13,7 @@ export class MailService {
         this.mailerService.sendMail({
             to: email,
             subject: 'Email Verification!!',
-            template: 'verification',
+            template: './verification',
             context: {
                 name, url
             }
