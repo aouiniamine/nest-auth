@@ -37,4 +37,17 @@ export class UserController{
 
 
     }
+
+    @Post('/user/login')
+    async login(@Body() user: {email: string, password: string}){
+        const {email, password} = user;
+
+        const userFound = await this.userService.findUser({email});
+        if(!userFound) return {message: 'user not found'}
+
+        const isMatch = await bcrypt.compare(password, userFound.password);
+        if(!isMatch) return {message: 'password is incorrect'}
+
+        return userFound
+    }
 }
