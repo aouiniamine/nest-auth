@@ -20,8 +20,7 @@ export class UserController{
         const {_id} = savedUser; // setup token
         const token = await this.jwtService.signAsync({_id})
 
-        let [name, email] = [String(newUser.name), String(newUser.email)]
-        this.mailService.verify({name, email}, token) // send email to verify
+        this.mailService.verify(savedUser, token) // send email to verify
         return {
             access_token: token
         }

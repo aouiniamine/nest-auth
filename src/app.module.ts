@@ -6,7 +6,7 @@ import { UserModule } from './users/user.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [ConfigModule.forRoot(),
+  imports: [ConfigModule.forRoot({isGlobal: true}),
     MongooseModule.forRoot('mongodb://localhost/nest-auth'),
     UserModule],
   controllers: [AppController],
