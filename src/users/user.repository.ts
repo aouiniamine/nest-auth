@@ -17,9 +17,10 @@ export class UserRepository {
         return newUser.save();
     }
 
-    async verifyUser(user: UserDocument): Promise<UserDocument>{
-        const {_id} = user
-        const verifiedUser = this.userModel.findByIdAndUpdate(_id, {isVerified: true})
-        return verifiedUser;
+    async verifyUser(_id: string): Promise<any>{
+        const user = this.userModel.findByIdAndUpdate(_id, {isVerified: true})
+        return {
+            message: 'Verification Complete!!'
+        }
     }
 }

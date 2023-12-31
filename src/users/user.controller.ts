@@ -1,9 +1,10 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { UserRepository } from './user.repository'
 import * as bcrypt from 'bcrypt'
 import { User, UserDocument } from "./user.schema";
 import { JwtService } from '@nestjs/jwt';
 import { MailService } from "src/mail/mail.service";
+import { jwtConstants } from "./constants";
 
 @Controller()
 
@@ -24,5 +25,16 @@ export class UserController{
         return {
             access_token: token
         }
+    }
+
+    @Get('/user/verify/:token')
+    async verify(@Param() params: {token: string}){
+        const {token} = params
+        const {secret} = jwtConstants
+        const {_id} = await this.jwtService.verifyAsync(token, {secret})
+        const user = this.userService.verifyUser(_id)
+        return user
+
+
     }
 }
